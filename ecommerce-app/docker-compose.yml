@@ -1,0 +1,28 @@
+version: '3'
+services:
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "5000:5000"
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://user:password@db/auth_db
+
+  product-service:
+    build: ./product-service
+    ports:
+      - "5001:5001"
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://user:password@db/product_db
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "5002:5002"
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://user:password@db/order_db
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
